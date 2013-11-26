@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+</head>
+<body>
+Hello World
+<div ng-controller="myCtrl">
+    {{ name }} <!--equivalent to <span ng-bind="name"></span>-->
+    <button ng-click="setToAnand()">Click me</button>
+    <button ng-click="deleteElement()">do not click me</button>
+    <input type="text" ng-model="search" ng-change="inputChanged()"/>
+    search model : {{ search }}
+    <ul>
+        <li ng-repeat="item in list | filter:search">
+            {{item.name}}  - {{item.gender}}
+            <button ng-click="setFem(item, $index)"></button>
+        </li>
+    </ul>
+</div>
+<script src="angular.min.js"></script>
+<script>
+    angular.module("myApp", [])
+            .controller("myCtrl", function($scope, $log){
+                $scope.search = "type smthing";
+                $scope.setFem = function(item, idx){
+                    item.gender = "f";
+                    $scope.list[idx].name = "ttrwtr";
+                };
+                $scope.setToAnand = function(){
+                    $scope.name = "anand";
+                    $scope.search= " I am coming from the server";
+                };
+                $scope.inputChanged = function(){
+                    $log.log("input changed to " + $scope.search);
+                    $scope.name="jerome";
+                };
+                $scope.deleteElement = function(){
+                    $scope.list.splice(0,1);
+                };
+                $scope.name = "enkhtur";
+
+                $scope.list = [{
+                    name: "enhtur",
+                    gender: "m"
+                },{
+                    name: "lulu",
+                    gender: "m"
+                },{
+                    name: "anand",
+                    gender: "m"
+                },{
+                    name: "jerome",
+                    gender: "m"
+                },{
+                    name: "enhtur",
+                    gender: "m"
+                },{
+                    name: "jerome",
+                    gender: "m"
+                },{
+                    name: "enkhtur",
+                    gender: "m"
+                },{
+                    name: "jerome",
+                    gender: "m"
+                },{
+                    name: "enhur",
+                    gender: "m"
+                }];
+
+            });
+</script>
+</body>
+</html>
